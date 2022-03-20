@@ -17,9 +17,12 @@
 # You should have received a copy of the GNU General Public License along with
 # Chinese Support Redux.  If not, see <https://www.gnu.org/licenses/>.
 
+import re
+
 from aqt import mw, gui_hooks
 from aqt.theme import theme_manager
 from aqt.editor import Editor
+from aqt.utils import showWarning
 
 from .behavior import update_fields
 from .main import config
@@ -109,12 +112,25 @@ class EditManager:
         return False
 
 
-def append_tone_styling(editor):
-    js = 'var css = document.styleSheets[0];'
+CSS_RULE = re.compile("([^ ]+) *\\{([^}]*)\\}")
 
+def append_tone_styling(editor):
+    rules = []
     for line in editor.note.note_type()['css'].split('\n'):
         if line.startswith('.tone'):
-            js += 'css.insertRule("{}", css.cssRules.length);'.format(
-                line.rstrip())
+            m = CSS_RULE.search(line)
+            if m:
+                rules.append((m.group(1), m.group(2)))
+            else:
+                showWarning("WARN: could not parse CSS tone rule. "
+                            "Currently, tone CSS rules need to be one liners.")
+
+    inner_js = ""
+    for rulename, ruledef in rules:
+        for part in ruledef.split(';'):
+            if ':' in part:
+                [property, value] = part.split(':', 1)
+                inner_js += f"jQuery('{rulename.strip()}', this.shadowRoot).css('{property.strip()}', '{value.strip()}');\n"
+    js = "jQuery('div.field').each(function () {\n%s})" % inner_js
 
     editor.web.eval(js)
