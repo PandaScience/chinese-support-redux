@@ -72,7 +72,7 @@ class EditManager:
         if not self.buttonOn:
             return False
 
-        allFields = mw.col.models.fieldNames(note.note_type())
+        allFields = mw.col.models.field_names(note.note_type())
         field = allFields[index]
 
         if update_fields(note, field, allFields):
