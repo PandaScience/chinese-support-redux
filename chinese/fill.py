@@ -90,7 +90,7 @@ def bulk_fill_all():
         note = mw.col.getNote(nid)
         fields = [
             f
-            for f in mw.col.models.fieldNames(note.model())
+            for f in mw.col.models.field_names(note.note_type())
             if f not in exclude
         ]
         n_updated += update_fields(note, 'Hanzi', fields)

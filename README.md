@@ -1,5 +1,16 @@
 # Chinese Support Redux
 
+## psii's Repository
+
+This repository's `master` branch follows the [upstream](https://github.com/luoliyan/chinese-support-redux) repository and additionally contains my not yet accepted pull requests:
+
+These pull requests are:
+- [#179](https://github.com/luoliyan/chinese-support-redux/pull/179): Allow simultaneously adding cards and browsing cards
+- [#204](https://github.com/luoliyan/chinese-support-redux/pull/204): fix: display tones in newer anki
+- [#205](https://github.com/luoliyan/chinese-support-redux/pull/205): fix: toggle button
+
+----
+
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6b99fcb30a2142d899f79c601a6aa291)](https://app.codacy.com/app/luoliyan/chinese-support-redux?utm_source=github.com&utm_medium=referral&utm_content=luoliyan/chinese-support-redux&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/luoliyan/chinese-support-redux.svg?branch=master)](https://travis-ci.org/luoliyan/chinese-support-redux) [![Coverage Status](https://coveralls.io/repos/github/luoliyan/chinese-support-redux/badge.svg?branch=master)](https://coveralls.io/github/luoliyan/chinese-support-redux?branch=master)
 
